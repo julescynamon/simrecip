@@ -11,9 +11,15 @@
 
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
+            <!-- CSS only -->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/united/bootstrap.min.css">
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.2.2/dist/united/bootstrap.min.css">
         {% endblock %}
     </head>
     <body>
+        {% block header %}
+            {% include "partials/_header.html.twig" %}
+        {% endblock %}
         {% block body %}{% endblock %}
     </body>
 </html>
