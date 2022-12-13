@@ -4,8 +4,15 @@
 
 {% block body %}
     <div class="container mt-4">
-        <h1>Mes ingrédients</h1>
-            <table class="table table-hover">
+
+        {% if not ingredients.items is same as([]) %}
+            <h1>Mes ingrédients</h1>
+            <small class="mt-4">
+                <div class="count">
+                    Total d'ingrédients à votre disposition : {{ ingredients.getTotalItemCount }}
+                </div>
+            </small>
+            <table class="table table-hover mt-4">
                 <thead>
                     <tr>
                     <th scope="col">Numéro</th>
@@ -25,9 +32,13 @@
                     {% endfor %}
                 </tbody>
             </table>
-            <div class="navigation">
+            <div class="navigation d-flex justify-content-center mt-4">
                 {{ knp_pagination_render(ingredients) }}
             </div>
+        {% else %}
+                <h4>Il n'y a pas d'ingrédients ...</h4>
+        {% endif %}
+
     </div>
 {% endblock %}
 
