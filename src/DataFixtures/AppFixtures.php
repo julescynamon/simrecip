@@ -9,18 +9,16 @@ use App\Entity\Recette;
 use App\Entity\Ingredient;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
 
     private Generator $faker;
-    private UserPasswordHasherInterface $hasher;
 
-    public function __construct(UserPasswordHasherInterface $hasher)
+
+    public function __construct()
     {
         $this->faker = Factory::create('fr_FR');
-        $this->hasher = $hasher;
     }
 
 
@@ -64,11 +62,8 @@ class AppFixtures extends Fixture
             $user->setEmail($this->faker->email())
                 ->setFullName($this->faker->name())
                 ->setPseudo($this->faker->userName())
-                ->setRoles(['ROLE_USER']);
-
-            $hashPassword = $this->hasher->hashPassword($user, 'password');
-
-            $user->setPassword($hashPassword);
+                ->setRoles(['ROLE_USER'])
+                ->setPlainPassword('password');
 
             $manager->persist($user);
         }
